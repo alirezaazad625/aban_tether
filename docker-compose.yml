@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - '5000:5000'
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data
+
+  worker:
+    build: .
+    entrypoint: [ "python", "-m" ,"src.worker" ]
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data
